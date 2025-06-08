@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #da373d;
+      }
+      .product-image-container {
+        position: relative;
+        width: 100%;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        overflow: hidden;
+      }
+      .product-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .carousel-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        height: 80px;
+      }
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        height: 100%;
+      }
+      .carousel-slide {
+        min-width: 100%;
+        position: relative;
+      }
+      .carousel-indicators {
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+      }
+      .carousel-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+      }
+      .carousel-indicator.active {
+        background-color: white;
+      }
+      .ad-label {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(4px);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Закрепленный поиск и верхний блок -->
+    <div class="sticky rounded-b-xl top-0 z-50 transition-all duration-300 bg-white dark:bg-gray-800 shadow-sm">
+      <div class="container mx-auto px-4">
+        <!-- Строка с поиском и чатом -->
+        <div class="flex items-center py-3 gap-3">
+          <div class="relative flex-1">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+              </svg>
+            </div>
+            <input
+              type="search"
+              class="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Искать на Caravan SP"
+              required
+            />
+          </div>
+
+          <!-- Иконка чата с количеством сообщений -->
+          <div class="relative">
+            <button class="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-500 relative">
+              <svg class="w-8 h-8 text-gray-800 dark:text-white me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-6.616l-2.88 2.592C8.537 20.461 7 19.776 7 18.477V17H5a2 2 0 0 1-2-2V6Zm4 2a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2H7Zm8 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2Zm-8 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm5 0a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2h-5Z"/>
+              </svg>
+              <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -end-0 dark:border-gray-900">8</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Основной контент с нижним отступом для нижнего меню -->
+    <div class="container mx-auto px-2 sm:px-4 py-8 pb-24">
+      <!-- Карусель рекламы -->
+      <div class="carousel-container mb-3">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Реклама 1 -->
+          <a href="https://example.com/ad1" target="_blank" class="carousel-slide bg-gradient-to-r from-purple-500 to-pink-500 p-4 text-white">
+            <div class="flex items-center h-full">
+              <div class="flex-1">
+                <h3 class="font-bold text-lg">Специальное предложение!</h3>
+                <p class="text-sm">Скидки до 30% на все товары</p>
+              </div>
+            </div>
+            <span class="ad-label">Реклама</span>
+          </a>
+
+          <!-- Реклама 2 -->
+          <a href="https://example.com/ad2" target="_blank" class="carousel-slide bg-gradient-to-r from-blue-500 to-teal-400 p-4 text-white">
+            <div class="flex items-center h-full">
+              <div class="flex-1">
+                <h3 class="font-bold text-lg">Новая коллекция!</h3>
+                <p class="text-sm">Только сегодня скидка 25%</p>
+              </div>
+            </div>
+            <span class="ad-label">Реклама</span>
+          </a>
+
+          <!-- Реклама 3 -->
+          <a href="https://example.com/ad3" target="_blank" class="carousel-slide bg-gradient-to-r from-amber-500 to-orange-500 p-4 text-white">
+            <div class="flex items-center h-full">
+              <div class="flex-1">
+                <h3 class="font-bold text-lg">Ограниченный выпуск</h3>
+                <p class="text-sm">Уникальные товары в наличии</p>
+              </div>
+            </div>
+            <span class="ad-label">Реклама</span>
+          </a>
+        </div>
+
+        <!-- Индикаторы -->
+        <div class="carousel-indicators" id="carouselIndicators">
+          <div class="carousel-indicator active" data-index="0"></div>
+          <div class="carousel-indicator" data-index="1"></div>
+          <div class="carousel-indicator" data-index="2"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+        <!-- Карточка 1 -->
+        <div class="bg-white border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 relative">
+          <!-- Аватар продавца -->
+          <div class="absolute top-2 right-2 z-10">
+            <div class="relative group">
+              <img class="w-10 h-10 rounded-full cursor-pointer" src="https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/2c104d7ab88c48f1a9991f9b6a8495ce/full" alt="Seller"
+                   onclick="openChat('Seller1')"/>
+              <div class="top-0 start-7 absolute w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
+              <!-- Тултип с информацией -->
+              <div class="absolute hidden group-hover:block right-0 top-full mt-2 w-48 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-20">
+                <div class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200">
+                  <div class="font-medium">Seller1</div>
+                  <div class="text-green-500">Online</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Контейнер для изображения товара -->
+          <div class="product-image-container">
+            <img class="product-image" src="https://ftbwiki.org/images/0/06/Shulker.png" alt="product image" />
+          </div>
+
+          <div class="px-3 sm:px-7 pb-3 sm:pb-5 pt-3">
+            <h5 class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">Шалкер с длинным названием товара</h5>
+            <h5 class="text-sm sm:text-base font-semibold tracking-tight text-gray-700 dark:text-white truncate">Описание товара может быть довольно длинным</h5>
+            <div class="flex items-center justify-between mt-2 sm:mt-4">
+              <span class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">5 АР</span>
+              <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.268 6A2 2 0 0 0 14 9h1v1a2 2 0 0 0 3.04 1.708l-.311 1.496a1 1 0 0 1-.979.796H8.605l.208 1H16a3 3 0 1 1-2.83 2h-2.34a3 3 0 1 1-4.009-1.76L4.686 5H4a1 1 0 0 1 0-2h1.5a1 1 0 0 1 .979.796L6.939 6h5.329Z"/>
+                  <path d="M18 4a1 1 0 1 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0V8h2a1 1 0 1 0 0-2h-2V4Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="bg-white border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 relative">
+          <!-- Аватар продавца -->
+          <div class="absolute top-2 right-2 z-10">
+            <div class="relative group">
+              <img class="w-10 h-10 rounded-full cursor-pointer" src="https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/63ed47877aa3470fbfc46c5356c3d797/full" alt="Seller"
+                   onclick="openChat('Seller2')"/>
+              <div class="top-0 start-7 absolute w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
+              <!-- Тултип с информацией -->
+              <div class="absolute hidden group-hover:block right-0 top-full mt-2 w-48 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-20">
+                <div class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200">
+                  <div class="font-medium">Seller2</div>
+                  <div class="text-red-500">Offline</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Контейнер для изображения товара -->
+          <div class="product-image-container">
+            <img class="product-image" src="https://avatars.mds.yandex.net/i?id=d9edbf3673166b47526c52643302fd4e_l-5858228-images-thumbs&ref=rim&n=13&w=1920&h=1080" alt="product image" />
+          </div>
+
+          <div class="px-3 sm:px-5 pb-3 sm:pb-5 pt-3">
+            <h5 class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">Арт</h5>
+            <h5 class="text-sm sm:text-base font-semibold tracking-tight text-gray-700 dark:text-white truncate">Просто арт</h5>
+            <div class="flex items-center justify-between mt-2 sm:mt-4">
+              <span class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">60 АР</span>
+              <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.268 6A2 2 0 0 0 14 9h1v1a2 2 0 0 0 3.04 1.708l-.311 1.496a1 1 0 0 1-.979.796H8.605l.208 1H16a3 3 0 1 1-2.83 2h-2.34a3 3 0 1 1-4.009-1.76L4.686 5H4a1 1 0 0 1 0-2h1.5a1 1 0 0 1 .979.796L6.939 6h5.329Z"/>
+                  <path d="M18 4a1 1 0 1 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0V8h2a1 1 0 1 0 0-2h-2V4Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Нижнее меню -->
+    <div class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+      <div class="grid h-full max-w-lg grid-cols-3 mx-auto font-medium">
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+          </svg>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Главная</span>
+        </button>
+
+        <!-- Кнопка корзины -->
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group relative">
+          <div class="relative">
+            <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                <path d="M4 4a1 1 0 0 1 1-1h1.5a1 1 0 0 1 .979.796L7.939 6H19a1 1 0 0 1 .979 1.204l-1.25 6a1 1 0 0 1-.979.796H9.605l.208 1H17a3 3 0 1 1-2.83 2h-2.34a3 3 0 1 1-4.009-1.76L5.686 5H5a1 1 0 0 1-1-1Z"/>
+                <path d="M2 14v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H2Z"/>
+            </svg>
+            <span class="absolute -top-1 -right-3 bg-green-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">6</span>
+          </div>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Корзина</span>
+        </button>
+
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+          </svg>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Профиль</span>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function openChat(sellerName) {
+        alert(`Открыть чат с ${sellerName}`);
+        // Здесь можно реализовать открытие модального окна с чатом
+      }
+    </script>
+  </body>
+</html>

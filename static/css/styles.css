@@ -1,0 +1,198 @@
+/* Base Styles */
+.product-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark .product-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+  min-height: 120px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cart Controls */
+.cart-controls-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.in-cart-btn {
+  background-color: #10b981;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  height: 2.5rem;
+  min-width: 6rem;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.in-cart-btn:hover {
+  background-color: #059669;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  background-color: #f3f4f6;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  height: 2.5rem;
+}
+
+.dark .quantity-controls {
+  background-color: #374151;
+  border-color: #4b5563;
+}
+
+.quantity-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #111827;
+}
+
+.dark .quantity-btn {
+  color: #f3f4f6;
+}
+
+.quantity-input {
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  background-color: transparent;
+  -moz-appearance: textfield;
+  color: #111827;
+}
+
+.dark .quantity-input {
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+}
+
+.dark .modal-content {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #374151;
+}
+
+.dark .modal-content input,
+.dark .modal-content button:not(.bg-blue-500) {
+  background-color: #374151;
+  color: #f3f4f6;
+  border-color: #4b5563;
+}
+
+/* Responsive fixes */
+@media (max-width: 640px) {
+  .cart-controls-container {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .quantity-controls {
+    gap: 0.25rem;
+    height: 2rem;
+  }
+
+  .quantity-btn, .quantity-input {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .dark .quantity-controls {
+  background-color: #374151;
+  border-color: #4b5563;
+  }
+
+  .dark .quantity-btn {
+    color: #f3f4f6;
+  }
+
+  .dark .quantity-input {
+    background-color: #374151;
+    color: #f3f4f6;
+    border-color: #4b5563;
+  }
+
+  .dark .modal-content button.bg-blue-500:hover {
+    background-color: #3b82f6;
+  }
+
+  .dark .modal-content button.bg-red-500:hover {
+    background-color: #ef4444;
+  }
+}

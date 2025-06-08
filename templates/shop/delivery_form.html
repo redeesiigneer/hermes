@@ -1,0 +1,10 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+    <h2>Подтверждение доставки</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="code" placeholder="Введите код доставки">
+        <button type="submit">Подтвердить</button>
+    </form>
+{% endblock %}

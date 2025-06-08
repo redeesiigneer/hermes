@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CORE Hermes</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+  <!-- Header -->
+{% include 'components/header.html' %}
+  <!-- Main Content -->
+  <div class="container mx-auto px-2 sm:px-4 py-24 pb-24">
+    <!-- Carousel -->
+    <div class="carousel-container mb-3">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Slides will be loaded from JS -->
+      </div>
+      <div class="carousel-nav carousel-prev">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </div>
+      <div class="carousel-nav carousel-next">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6" id="productsGrid">
+      {% include 'components/product-card.html' %}
+        <!-- Product cards will be loaded from JS -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  {% include 'components/footer.html' %}
+
+  <!-- Modals -->
+  {% include 'components/modals.html' %}
+  <!-- Scripts -->
+  <script>
+  // Проверяем предпочтения пользователя и устанавливаем тему
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+</script>
+  <script src="{% static 'js/carousel.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

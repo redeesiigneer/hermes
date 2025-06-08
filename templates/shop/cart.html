@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CORE Hermes</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="../../static/css/styles.css">
+  <link rel="stylesheet" href="../../static/css/carousel.css">
+</head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+
+
+  <!-- Header -->
+  <div id="header"></div>
+   
+    <div id="footer"></div>
+    <script>
+  // Проверяем предпочтения пользователя и устанавливаем тему
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+</script>
+    <script src="../../static/js/main.js" type="module"></script>
+  </body>
+</html>
